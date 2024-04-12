@@ -1,4 +1,4 @@
-const BASE_URL = 'http://localhost:3000/films'
+const BASE_URL = 'https://my-json-server.typicode.com/kennedyzzz/code-challenge-3/films'
 document.addEventListener('DOMContentLoaded' , () => {
     findFilm()
 } )
