@@ -30,23 +30,21 @@ function films(movie) {
        deleteMovie(movie.id);
      })
     doc.appendChild(deleteButton);
-  
-    
-    const doc2 = document.querySelector("#films");
-    doc2.appendChild(doc);
-    doc.classList.add("film");
-    doc.classList.add("item");
-    doc.addEventListener("click", () => {
-      enterMovie(movie);
-    });
-  }
-//Delete request
+ //Delete request
   function deleteMovie(movieId) {
     fetch(`${BASE_URL} ${movieId}`, {
       method: "DELETE",
       headers: {
         'Content-Type': 'application/json'
       },
+    });
+  }
+ const doc2 = document.querySelector("#films");
+    doc2.appendChild(doc);
+    doc.classList.add("film");
+    doc.classList.add("item");
+    doc.addEventListener("click", () => {
+      enterMovie(movie);
     });
   }
 
