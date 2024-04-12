@@ -23,22 +23,35 @@ function films(movie) {
      doc.id = "id" + movie.id;
      
     //delete button on each movie
-     const deleteButton = document.createElement("button");
-     deleteButton.textContent = "delete";
-     deleteButton.classList.add("delete-button");
-     deleteButton.addEventListener("click", () => {
-       deleteMovie(movie.id);
-     })
-    doc.appendChild(deleteButton);
- //Delete request
-  function deleteMovie(movieId) {
-    fetch(`${BASE_URL} ${movieId}`, {
-      method: "DELETE",
-      headers: {
-        'Content-Type': 'application/json'
-      },
-    });
-  }
+      const deleteButton = document.createElement("button");
+  deleteButton.textContent = "delete";
+  deleteButton.classList.add("delete-button");
+  deleteButton.addEventListener("click", () => {
+    deleteMovie(movie.id);
+    doc.remove(); // remove the list item from the DOM after deleting the movie
+  });
+  doc.appendChild(deleteButton);
+  document.getElementById("movieList").appendChild(doc); // assuming you have a ul element with id "movieList"
+}
+
+// Delete request
+function deleteMovie(movieId) {
+  fetch(`${BASE_URL}/${movieId}`, {
+    method: "DELETE",
+    headers: {
+      'Content-Type': 'application/json'
+    },
+  })
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Failed to delete movie');
+    }
+    return response.json();
+  })
+  .catch(error => {
+    console.error('Error deleting movie:', error);
+  });
+}
  const doc2 = document.querySelector("#films");
     doc2.appendChild(doc);
     doc.classList.add("film");
